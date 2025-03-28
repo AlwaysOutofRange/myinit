@@ -13,7 +13,7 @@ function create_initramfs() {
 
   # Clean and create directories
   rm -rf initramfs
-  mkdir -p initramfs/{dev,proc,sys,bin,sbin}
+  mkdir -p initramfs/{dev,proc,sys,bin,sbin,run}
 
   # Copy the Rust init binary
   if [ ! -f target/x86_64-unknown-linux-musl/release/myinit ]; then
@@ -43,7 +43,6 @@ function create_initramfs() {
     ln -sf busybox ls
     ln -sf busybox cat
     ln -sf busybox echo
-    ln -sf busybox shutdown
     cd ../..
   else
     echo "ERROR: BusyBox not found! Please install it."

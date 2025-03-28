@@ -1,7 +1,9 @@
+use serde::{Deserialize, Serialize};
+
 pub mod config;
 pub mod supervisor;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ServiceSpec {
     pub name: String,
     pub command: String,

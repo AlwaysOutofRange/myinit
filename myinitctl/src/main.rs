@@ -20,13 +20,13 @@ fn run() -> Result<(), Error> {
 
     for cmd in &commands {
         if cmd.name() == cmd_name {
-            if args.len() > 2 {
+            if args.len() > 1 {
                 return cmd.execute(args[2..].to_vec());
             }
         }
     }
 
-    if !cmd_name.is_empty() && !commands.iter().map(|c| c.name() == cmd_name).any(|x| x) {
+    if !cmd_name.is_empty() {
         println!("Unknown command: {}", cmd_name);
     }
 

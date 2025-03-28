@@ -13,6 +13,7 @@ This document outlines the planned features and learning milestones for the MyIn
 - [x] Process management with fork/exec and reaping
 - [x] Simple service management
 - [x] Simple Command Line Interface
+- [x] Add unix socket for messages between services and command line utilities
 
 ## Goals
 
@@ -31,7 +32,7 @@ This document outlines the planned features and learning milestones for the MyIn
 - [ ] Implement shutdown sequence
 
 ### Core Utilities
-- [ ] add myinit cli
+- [ ] Add myinit cli
 - [ ] Replace BusyBox with custom implementations
 - [ ] Implement minimal versions of essential utilities:
   - [ ] `ls` - List directory contents
