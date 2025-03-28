@@ -1,0 +1,46 @@
+# MyInit TODO List
+
+This document outlines the planned features and learning milestones for the MyInit project - a minimal init system for learning how Linux initialization works.
+
+## Requirements
+- qemu-system-x86_64
+- busybox
+- rustup
+- cpio
+
+## Current Status
+- [x] Basic init system that can mount essential filesystems
+- [x] Process management with fork/exec and reaping
+- [x] Simple service management
+
+## Goals
+
+### Stability Improvements
+- [ ] Ensure proper error handling throughout the codebase
+- [ ] Add more verbose logging for debugging purposes
+
+### Service Enhancements
+- [ ] Implement service dependency resolution
+- [ ] Add service state tracking (starting, running, stopped, failed)
+- [ ] Implement signal handling (SIGTERM, SIGINT)
+- [ ] Add automatic service restart capability
+- [ ] Track and log service exit codes
+- [ ] Add timeout handling for service startup
+- [ ] Create a simple configuration file format
+- [ ] Add logging capabilities
+- [ ] Implement shutdown sequence
+
+### Core Utilities
+- [ ] Replace BusyBox with custom implementations
+- [ ] Implement minimal versions of essential utilities:
+  - [ ] `ls` - List directory contents
+  - [ ] `cat` - Concatenate files
+  - [ ] `echo` - Display text
+  - [ ] `ps` - Show process status
+  - [ ] `kill` - Send signals to processes
+
+### Learning Milestones
+- [ ] Understand process lifecycle in detail
+- [ ] Learn how to properly manage process groups and sessions
+- [ ] Implement a minimal shell for interactive management
+- [ ] Add socket activation for services
