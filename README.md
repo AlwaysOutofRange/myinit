@@ -31,6 +31,7 @@ This document outlines the planned features and learning milestones for the MyIn
 - [ ] Implement shutdown sequence
 
 ### Core Utilities
+- [ ] add myinit cli
 - [ ] Replace BusyBox with custom implementations
 - [ ] Implement minimal versions of essential utilities:
   - [ ] `ls` - List directory contents
