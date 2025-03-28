@@ -1,12 +1,14 @@
-use myinit::Error;
-use myinit::subsystems::fs;
-use myinit::subsystems::process::{DefaultProcessManager, ProcessManager};
-use myinit::subsystems::services::ServiceSpec;
-use myinit::subsystems::services::supervisor::Supervisor;
+use myinit::{
+    Error,
+    subsystems::{
+        fs,
+        process::{DefaultProcessManager, ProcessManager},
+        services::{ServiceSpec, supervisor::Supervisor},
+    },
+};
 
 fn main() -> Result<(), Error> {
     fs::mount_essential()?;
-    fs::setup_env();
 
     let pm = DefaultProcessManager;
     let mut sv = Supervisor::new(pm);

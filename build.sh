@@ -4,8 +4,8 @@
 set -e  # Exit on error
 
 function build() {
-  echo "Building Rust init program..."
-  RUSTFLAGS='-C link-arg=-s' cargo build --release --target x86_64-unknown-linux-musl
+  echo "Building Rust binarys..."
+  RUSTFLAGS='-C link-arg=-s' cargo build --release --target x86_64-unknown-linux-musl --workspace
 }
 
 function create_initramfs() {
@@ -13,7 +13,7 @@ function create_initramfs() {
 
   # Clean and create directories
   rm -rf initramfs
-  mkdir -p initramfs/{dev,proc,sys,bin}
+  mkdir -p initramfs/{dev,proc,sys,bin,sbin}
 
   # Copy the Rust init binary
   if [ ! -f target/x86_64-unknown-linux-musl/release/myinit ]; then
@@ -21,8 +21,16 @@ function create_initramfs() {
     exit 1
   fi
 
-  cp target/x86_64-unknown-linux-musl/release/myinit initramfs/init
-  chmod 755 initramfs/init
+  cp target/x86_64-unknown-linux-musl/release/myinit initramfs/sbin/init
+  chmod 755 initramfs/sbin/init
+
+  cd initramfs
+  ln -sf sbin/init init
+  cd ..
+
+  # Copy myinitctl to /bin
+  cp target/x86_64-unknown-linux-musl/release/myinitctl initramfs/bin/myinitctl
+  chmod 755 initramfs/bin/myinitctl
 
   # Add BusyBox
   if command -v busybox >/dev/null 2>&1; then
@@ -35,6 +43,7 @@ function create_initramfs() {
     ln -sf busybox ls
     ln -sf busybox cat
     ln -sf busybox echo
+    ln -sf busybox shutdown
     cd ../..
   else
     echo "ERROR: BusyBox not found! Please install it."

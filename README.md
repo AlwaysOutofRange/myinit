@@ -12,12 +12,12 @@ This document outlines the planned features and learning milestones for the MyIn
 - [x] Basic init system that can mount essential filesystems
 - [x] Process management with fork/exec and reaping
 - [x] Simple service management
+- [x] Simple Command Line Interface
 
 ## Goals
 
 ### Stability Improvements
 - [ ] Ensure proper error handling throughout the codebase
-- [ ] Add more verbose logging for debugging purposes
 
 ### Service Enhancements
 - [ ] Implement service dependency resolution
@@ -39,9 +39,9 @@ This document outlines the planned features and learning milestones for the MyIn
   - [ ] `echo` - Display text
   - [ ] `ps` - Show process status
   - [ ] `kill` - Send signals to processes
+  - [ ] `myshell` - A minimal shell
 
 ### Learning Milestones
 - [ ] Understand process lifecycle in detail
 - [ ] Learn how to properly manage process groups and sessions
-- [ ] Implement a minimal shell for interactive management
 - [ ] Add socket activation for services

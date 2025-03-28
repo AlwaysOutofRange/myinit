@@ -1,7 +1,9 @@
-[package]
-name = "myinit"
-version = "0.1.0"
-edition = "2024"
+[workspace]
+resolver = "3"
+members = [
+    "myinit",
+    "myinitctl"
+]
 
 [profile.release]
 opt-level = 'z'   # Optimize for size
@@ -9,8 +11,3 @@ lto = true        # Enable Link Time Optimization
 codegen-units = 1 # Reduce parallel code generation units to increase optimization
 panic = 'abort'   # Abort on panic
 strip = true      # Strip symbols from binary
-
-[dependencies]
-nix = { version = "0.29.0", features = ["process", "mount"] }
-serde = { version = "1.0.219", features = ["derive"] }
-toml = "0.8.20"
