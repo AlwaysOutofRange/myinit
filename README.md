@@ -2,6 +2,9 @@
 
 This document outlines the planned features and learning milestones for the MyInit project - a minimal init system for learning how Linux initialization works.
 
+### WARNING
+Please dont use this init system for production environments. It is intended for educational purposes only.
+
 ## Requirements
 - qemu-system-x86_64
 - busybox
@@ -14,11 +17,9 @@ This document outlines the planned features and learning milestones for the MyIn
 - [x] Simple service management
 - [x] Simple Command Line Interface
 - [x] Add unix socket for messages between services and command line utilities
+- [x] Implement shutdown sequence
 
 ## Goals
-
-### Stability Improvements
-- [ ] Ensure proper error handling throughout the codebase
 
 ### Service Enhancements
 - [ ] Implement service dependency resolution
@@ -29,10 +30,9 @@ This document outlines the planned features and learning milestones for the MyIn
 - [ ] Add timeout handling for service startup
 - [ ] Create a simple configuration file format
 - [ ] Add logging capabilities
-- [ ] Implement shutdown sequence
+- [ ] Add signal handling for shutdown/reboot
 
-### Core Utilities
-- [ ] Add myinit cli
+### Core Utilities (Not really related to the init system just for fun i guess)
 - [ ] Replace BusyBox with custom implementations
 - [ ] Implement minimal versions of essential utilities:
   - [ ] `ls` - List directory contents
