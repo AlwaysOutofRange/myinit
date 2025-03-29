@@ -43,6 +43,7 @@ function create_initramfs() {
     ln -sf busybox ls
     ln -sf busybox cat
     ln -sf busybox echo
+    ln -sf busybox kill
     cd ../..
   else
     echo "ERROR: BusyBox not found! Please install it."

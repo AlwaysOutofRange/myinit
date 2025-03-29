@@ -7,6 +7,7 @@ pub enum Command {
     StopService { name: String },
     RestartService { name: String },
     ListServices,
+    Shutdown { reboot: bool },
 }
 
 #[derive(Debug, Serialize, Deserialize)]

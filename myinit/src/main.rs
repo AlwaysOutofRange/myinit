@@ -6,18 +6,18 @@ use std::{
 use myinit::{
     Error,
     subsystems::{
-        fs,
         ipc::{
             SocketServer,
             protocol::{Command, Response, deserialize_command, serialize_response},
         },
         process::{DefaultProcessManager, ProcessManager},
         services::{ServiceSpec, supervisor::Supervisor},
+        system,
     },
 };
 
 fn main() -> Result<(), Error> {
-    fs::mount_essential()?;
+    system::fs::mount_essential()?;
 
     let pm = DefaultProcessManager;
     let sv = Arc::new(Mutex::new(Supervisor::new(pm)));
@@ -75,6 +75,15 @@ fn main() -> Result<(), Error> {
                 let services_json = serde_json::to_string(&services).unwrap_or_default();
                 Response::success_with_data("Services listed", services_json)
             }
+            Command::Shutdown { reboot } => {
+                system::shutdown::request_shutdown(reboot);
+
+                if reboot {
+                    Response::success("System is rebooting...")
+                } else {
+                    Response::success("System is shutting down...")
+                }
+            }
         };
 
         let response_str = serialize_response(&response)?;
@@ -85,7 +94,12 @@ fn main() -> Result<(), Error> {
 
     socket_server.start_background_thread()?;
 
+    let sv_for_shutdown = sv.clone();
     loop {
+        if system::shutdown::is_shutdown_requested() {
+            return system::shutdown::perform_shutdown(sv_for_shutdown);
+        }
+
         sv.lock().unwrap().get_process_manager_mut().reap()?;
         std::thread::sleep(std::time::Duration::from_secs(1));
     }
